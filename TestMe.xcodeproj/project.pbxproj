@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		247D81CA13B8041900828FD8 /* XMLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 247D81C613B8041900828FD8 /* XMLWriter.h */; };
+		247D81CB13B8041900828FD8 /* XMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 247D81C713B8041900828FD8 /* XMLWriter.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		960AB4CF10937EC70094C74A /* BPOCUnitXMLReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 960AB4C110937C630094C74A /* BPOCUnitXMLReporter.m */; };
@@ -21,7 +23,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TestMe */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TestMe;
 		};
 /* End PBXContainerItemProxy section */
@@ -31,11 +33,13 @@
 		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		247D81C613B8041900828FD8 /* XMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLWriter.h; sourceTree = "<group>"; };
+		247D81C713B8041900828FD8 /* XMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLWriter.m; sourceTree = "<group>"; };
 		32DBCF5E0370ADEE00C91783 /* TestMe_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMe_Prefix.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* TestMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TestMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		960AB4C110937C630094C74A /* BPOCUnitXMLReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPOCUnitXMLReporter.m; sourceTree = "<group>"; };
-		960AB4CA10937EB30094C74A /* TestMeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TestMeTests.octest; path = build/Debug/TestMeTests.octest; sourceTree = "<group>"; };
+		960AB4CA10937EB30094C74A /* TestMeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestMeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		960AB4CB10937EB30094C74A /* TestMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestMeTests-Info.plist"; sourceTree = "<group>"; };
 		960AB4D810937F030094C74A /* BPExampleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPExampleClass.h; sourceTree = "<group>"; };
 		960AB4D910937F030094C74A /* BPExampleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPExampleClass.m; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				247D81C513B8041900828FD8 /* XMLWriter-1.0.3.1-MIT */,
 				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
 				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
 			);
@@ -132,6 +137,16 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
+		247D81C513B8041900828FD8 /* XMLWriter-1.0.3.1-MIT */ = {
+			isa = PBXGroup;
+			children = (
+				247D81C613B8041900828FD8 /* XMLWriter.h */,
+				247D81C713B8041900828FD8 /* XMLWriter.m */,
+			);
+			name = "XMLWriter-1.0.3.1-MIT";
+			path = "Vendor/XMLWriter-1.0.3.1-MIT";
+			sourceTree = "<group>";
+		};
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				960AB4DA10937F030094C74A /* BPExampleClass.h in Headers */,
+				247D81CA13B8041900828FD8 /* XMLWriter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +225,11 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "TestMe" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* TestMe */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -261,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				960AB4DB10937F030094C74A /* BPExampleClass.m in Sources */,
+				247D81CB13B8041900828FD8 /* XMLWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

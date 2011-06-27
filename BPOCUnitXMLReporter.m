@@ -11,21 +11,15 @@
 
 #import <Foundation/Foundation.h>
 #import <SenTestingKit/SenTestingKit.h>
-
+#import "XMLWriter.h"
 
 @interface BPTestXunitXmlListener : NSObject
 {
 @private
-    NSXMLDocument *document;
-    NSXMLElement *suitesElement;
-    NSXMLElement *currentSuiteElement;
-    NSXMLElement *currentCaseElement;
+    XMLWriter *document;
 }
 
-@property (retain) NSXMLDocument *document;
-@property (retain) NSXMLElement *suitesElement;
-@property (retain) NSXMLElement *currentSuiteElement;
-@property (retain) NSXMLElement *currentCaseElement;
+@property (retain) XMLWriter *document;
 
 - (void)writeResultFile;
 
@@ -48,9 +42,6 @@ static void __attribute__ ((destructor)) BPTestXunitXmlListenerStop(void)
 @implementation BPTestXunitXmlListener
 
 @synthesize document;
-@synthesize suitesElement;
-@synthesize currentSuiteElement;
-@synthesize currentCaseElement;
 
 
 - (id)init;
@@ -64,9 +55,8 @@ static void __attribute__ ((destructor)) BPTestXunitXmlListenerStop(void)
         [center addObserver:self selector:@selector(testCaseStopped:) name:SenTestCaseDidStopNotification object:nil];
         [center addObserver:self selector:@selector(testCaseFailed:) name:SenTestCaseDidFailNotification object:nil];
 
-        self.document = [NSXMLDocument new];
-        self.suitesElement = [NSXMLElement elementWithName:@"testsuites"];
-        [self.document addChild:self.suitesElement];
+        self.document = [[XMLWriter alloc] init];
+        [self.document writeStartElement:@"testsuites"];
     }
     return self;
 }
@@ -75,16 +65,15 @@ static void __attribute__ ((destructor)) BPTestXunitXmlListenerStop(void)
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.document = nil;
-    self.suitesElement = nil;
-    self.currentSuiteElement = nil;
-    self.currentCaseElement = nil;
     [super dealloc];
 }
 
 - (void)writeResultFile;
 {
-    if (self.document)
-        [[self.document XMLData] writeToFile:@"ocunit.xml" atomically:NO];
+    if (self.document) {
+        [self.document writeEndElement:@"testsuites"];
+        [[self.document toData] writeToFile:@"ocunit.xml" atomically:NO];
+    }
 }
 
 
@@ -93,37 +82,32 @@ static void __attribute__ ((destructor)) BPTestXunitXmlListenerStop(void)
 - (void)testSuiteStarted:(NSNotification*)notification;
 {
     SenTest *test = [notification test];
-    self.currentSuiteElement = [NSXMLElement elementWithName:@"testsuite"];
-    [self.currentSuiteElement addAttribute:[NSXMLNode attributeWithName:@"name" stringValue:[test name]]];
+    [self.document writeStartElement:@"testsuite"];
+    [self.document writeAttribute:@"name" value:[test name]];
 }
 
 - (void)testSuiteStopped:(NSNotification*)notification;
 {
-    if (self.currentSuiteElement)
-    {
-        [self.suitesElement addChild:self.currentSuiteElement];
-        self.currentSuiteElement = nil;
-    }
+    [self.document writeEndElement:@"testsuite"];
 }
 
 - (void)testCaseStarted:(NSNotification*)notification;
 {
     SenTest *test = [notification test];
-    self.currentCaseElement = [NSXMLElement elementWithName:@"testcase"];
-    [self.currentCaseElement addAttribute:[NSXMLNode attributeWithName:@"name" stringValue:[test name]]];
+    [self.document writeStartElement:@"testcase"];
+    [self.document writeAttribute:@"name" value:[test name]];
 }
 
 - (void)testCaseStopped:(NSNotification*)notification;
 {
-    [self.currentSuiteElement addChild:self.currentCaseElement];
-    self.currentCaseElement = nil;
+    [self.document writeEndElement:@"testcase"];
 }
 
 - (void)testCaseFailed:(NSNotification*)notification;
 {
-    NSXMLElement *failureElement = [NSXMLElement elementWithName:@"failure"];
-    [failureElement setStringValue:[[notification exception] description]];
-    [self.currentCaseElement addChild:failureElement];
+    [self.document writeStartElement:@"failure"];
+    [self.document writeCharacters:[[notification exception] description]];
+    [self.document writeEndElement:@"failure"];
 }
 
 @end
