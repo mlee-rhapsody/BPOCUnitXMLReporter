@@ -72,7 +72,8 @@ static void __attribute__ ((destructor)) BPTestXunitXmlListenerStop(void)
 {
     if (self.document) {
         [self.document writeEndElement:@"testsuites"];
-        [[self.document toData] writeToFile:@"ocunit.xml" atomically:NO];
+        NSError *error;
+        [[self.document toString] writeToFile:@"ocunit.xml" atomically:NO encoding:NSUTF8StringEncoding error:&error];
     }
 }
 
